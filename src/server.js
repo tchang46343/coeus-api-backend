@@ -1,7 +1,19 @@
-const app = require("./app");
-const { PORT } = require("./config");
-// const PORT = process.env.PORT || 8000;
+// const app = require("./app");
+// const { PORT } = require("./config");
+// // const PORT = process.env.PORT || 8000;
 
-app.listen(PORT, () => {
-  console.log(`Server is Listening at http://localhost:${PORT}`);
+// app.listen(PORT, () => {
+//   console.log(`Server is Listening at http://localhost:${PORT}`);
+// });
+const express = require("express");
+const app = express();
+
+const PORT = process.env.PORT || 3000;
+
+app.get("/api/*", (req, res) => {
+  res.json({ ok: true });
 });
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+
+module.exports = { app };
