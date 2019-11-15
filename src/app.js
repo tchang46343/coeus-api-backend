@@ -40,23 +40,23 @@ app.get("/inventory", (req, res) => {
 
   res.json(results);
 });
-const vendorSetup = [
-  {
-    Vendor: "Cool Products",
-    Item_ID: "xyz",
-    Description: "hanger",
-    Price: "$1.50",
-    Availbility: "Yes"
-  },
+// const vendorSetup = [
+//   {
+//     Vendor: "Cool Products",
+//     Item_ID: "xyz",
+//     Description: "hanger",
+//     Price: "$1.50",
+//     Availbility: "Yes"
+//   },
 
-  {
-    Vendor: "Not Cool Products",
-    Item_ID: "BC-001",
-    Description: "Boot Bars",
-    Price: "$6.50",
-    Availbility: "Yes"
-  }
-];
+//   {
+//     Vendor: "Not Cool Products",
+//     Item_ID: "BC-001",
+//     Description: "Boot Bars",
+//     Price: "$6.50",
+//     Availbility: "Yes"
+//   }
+// ];
 app.post("/inventory", (req, res) => {
   const { Vendor, Item_ID, Description, Price, Availbility } = req.body;
 
@@ -94,8 +94,27 @@ app.post("/inventory", (req, res) => {
     Price,
     Availbility
   };
-  vendorSetup.push(newVendorSetup);
-  res.send("All data validated");
+  consumerData.push(newVendorSetup);
+
+  res
+    .status(201)
+    .location(`http://localhost:8000/inventory/${id}`)
+    .json(consumerData);
+});
+
+app.delete("/inventory/:inventoryId", (req, res) => {
+  const { inventoryId } = req.params;
+
+  const index = inventory.findIndex(invent => invent.id === inventoryId);
+  if (index === -1) {
+    return res.status(404).send("User not found");
+  }
+  inventory.splice(index, 1);
+  res.status(204).end();
+});
+
+app.get("/inventory", (req, res) => {
+  res.json(consumerData);
 });
 
 // app.use(function errorHandler(error, req, res, next) {

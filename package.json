@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha --require test/setup.js",
-    "start": "node src/app.js",
+    "start": "nodemon src/server.js",
     "dev": "nodemon src/server.js",
     "predeploy": "npm audit",
     "deploy": "git push heroku master"
@@ -27,5 +27,8 @@
   "globals": {
     "supertest": "true",
     "expect": "true"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
   }
 }
