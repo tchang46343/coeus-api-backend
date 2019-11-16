@@ -29,10 +29,12 @@ app.get("/inventory", (req, res) => {
     res.send("Please enter a valid vendor! Try again");
   }
 
-  // if (search != search) {
-  //   res.status(404);
-  //   res.send("You have entered a invalid vendor! Try again");
-  // }
+  function notValid(a, b) {
+    if (search != search) {
+      return "Error (404) You have entered a invalid vendor! Try again";
+    }
+  }
+  module.exports = notValid;
 
   let results = consumerData.filter(consumer =>
     consumer.Vendor.toLowerCase().includes(search.toLowerCase())
@@ -127,4 +129,5 @@ app.get("/inventory", (req, res) => {
 //   }
 //   res.status(500).json(response);
 // });
-// module.exports = app;
+
+module.exports = app;
