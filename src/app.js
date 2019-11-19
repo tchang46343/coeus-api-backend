@@ -21,44 +21,29 @@ app.use(
 );
 
 const consumerData = require("../inventory-data.js");
-
+// get the search query
 app.get("/inventory", (req, res) => {
-  const { search = " " } = req.query;
-  if (search == []) {
-    res.status(404);
-    res.send("Please enter a valid vendor! Try again");
-  }
+  const { search = "" } = req.query;
+  // filter the results by the search query
 
-  function notValid(a, b) {
-    if (search != search) {
-      return "Error (404) You have entered a invalid vendor! Try again";
-    }
-  }
-  module.exports = notValid;
-
-  let results = consumerData.filter(consumer =>
+  const results = consumerData.filter(consumer =>
     consumer.Vendor.toLowerCase().includes(search.toLowerCase())
   );
 
+  if (results === []) {
+    res
+      .status(404)
+      .json({ error: "Vendor Invalid, please enter a valid vendor" });
+  }
+
   res.json(results);
 });
-// const vendorSetup = [
-//   {
-//     Vendor: "Cool Products",
-//     Item_ID: "xyz",
-//     Description: "hanger",
-//     Price: "$1.50",
-//     Availbility: "Yes"
-//   },
 
-//   {
-//     Vendor: "Not Cool Products",
-//     Item_ID: "BC-001",
-//     Description: "Boot Bars",
-//     Price: "$6.50",
-//     Availbility: "Yes"
-//   }
-// ];
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+
 app.post("/inventory", (req, res) => {
   const { Vendor, Item_ID, Description, Price, Availbility } = req.body;
 
@@ -83,14 +68,14 @@ app.post("/inventory", (req, res) => {
     return res.status(400).send("Vendor must be between 3 and 40 characters");
   }
 
-  if ((Price = 0)) {
+  if (parseFloat(Price).isNaN) {
     return res.status(400).send("Price must be greater than $0.00");
   }
 
   const id = uuid();
   const newVendorSetup = {
     id,
-    vendor,
+    Vendor,
     Item_ID,
     Description,
     Price,
@@ -103,6 +88,11 @@ app.post("/inventory", (req, res) => {
     .location(`http://localhost:8000/inventory/${id}`)
     .json(consumerData);
 });
+
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
+////////////////////////////////////////
 
 app.delete("/inventory/:inventoryId", (req, res) => {
   const { inventoryId } = req.params;
@@ -118,16 +108,5 @@ app.delete("/inventory/:inventoryId", (req, res) => {
 app.get("/inventory", (req, res) => {
   res.json(consumerData);
 });
-
-// app.use(function errorHandler(error, req, res, next) {
-//   let response;
-//   if (NODE_ENV === "production") {
-//     response = { error: { message: "server error" } };
-//   } else {
-//     console.error(error);
-//     response = { message: error.message, error };
-//   }
-//   res.status(500).json(response);
-// });
 
 module.exports = app;
