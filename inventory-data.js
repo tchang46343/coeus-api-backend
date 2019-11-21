@@ -1,5 +1,6 @@
 module.exports = [
   {
+    id: 1,
     Vendor: "Madix",
     Item_ID: "GT-413-10",
     Description: "Store Shelf",
@@ -8,6 +9,7 @@ module.exports = [
   },
 
   {
+    id: 2,
     Vendor: "Castle",
     Item_ID: "RS22-5",
     Description: "Store Hanger Rack",
@@ -16,6 +18,7 @@ module.exports = [
   },
 
   {
+    id: 3,
     Vendor: "Vira-Insight",
     Item_ID: "PSKFO16",
     Description: "Clothing Hook",
@@ -24,6 +27,7 @@ module.exports = [
   },
 
   {
+    id: 4,
     Vendor: "Castle",
     Item_ID: "BC-01",
     Description: "Boot Clip",
@@ -32,6 +36,7 @@ module.exports = [
   },
 
   {
+    id: 5,
     Vendor: "PIN INC",
     Item_ID: "HL-44-GATE",
     Description: "Register Cabinet",
@@ -40,6 +45,7 @@ module.exports = [
   },
 
   {
+    id: 6,
     Vendor: "Tyco",
     Item_ID: "00000006363",
     Description: "Sensor Matic Device",

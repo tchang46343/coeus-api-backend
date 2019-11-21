@@ -44,7 +44,7 @@ app.get("/inventory", (req, res) => {
 ////////////////////////////////////////
 ////////////////////////////////////////
 
-app.post("/inventory", (req, res) => {
+app.post("/inventory", (req, res, next) => {
   const { Vendor, Item_ID, Description, Price, Availbility } = req.body;
 
   if (!Vendor) {
