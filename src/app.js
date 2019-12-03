@@ -14,7 +14,6 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 app.use(morgan(morganOption));
 app.use(express.json());
 app.use(helmet());
-app.use(cors());
 
 const consumerData = require("../inventory-data.js");
 // get the search query
