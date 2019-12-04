@@ -14,7 +14,6 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 app.use(morgan(morganOption));
 app.use(express.json());
 app.use(helmet());
-
 const consumerData = require("../inventory-data.js");
 // get the search query
 app.get("/inventory", (req, res) => {
@@ -40,41 +39,41 @@ app.get("/inventory", (req, res) => {
 ////////////////////////////////////////
 
 app.post("/inventory", (req, res, next) => {
-  const { Vendor, Item_ID, Description, Price, Availbility } = req.body;
+  const { vendor, item_name, description, price, availbility } = req.body;
 
-  if (!Vendor) {
+  if (!vendor) {
     return res.status(400).send("Vendor required");
   }
-  if (!Item_ID) {
+  if (!item_name) {
     return res.status(400).send("Item ID required");
   }
 
-  if (!Description) {
-    return res.status(400).send("Description needed for clear interpretation!");
+  if (!description) {
+    return res.status(400).send("description needed for clear interpretation!");
   }
-  if (!Price) {
+  if (!price) {
     return res.status(400).send("Everything in life cost money!");
   }
-  if (!Availbility) {
+  if (!availbility) {
     return res.status(400).send("Is there inventory in stock?");
   }
 
-  if (Vendor.length < 3 || Vendor.length > 40) {
+  if (vendor.length < 3 || vendor.length > 40) {
     return res.status(400).send("Vendor must be between 3 and 40 characters");
   }
 
-  if (parseFloat(Price).isNaN) {
-    return res.status(400).send("Price must be greater than $0.00");
+  if (parseFloat(price).isNaN) {
+    return res.status(400).send("price must be greater than $0.00");
   }
 
   const id = uuid();
   const newVendorSetup = {
     id,
-    Vendor,
-    Item_ID,
-    Description,
-    Price,
-    Availbility
+    vendor,
+    item_name,
+    description,
+    price,
+    availbility
   };
   consumerData.push(newVendorSetup);
 
