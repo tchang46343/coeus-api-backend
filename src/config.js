@@ -1,8 +1,8 @@
 module.exports = {
   PORT: process.env.PORT || 8000,
-
-  API_BASE_URL:
-    process.env.REACT_APP_API_BASE_URL ||
-    "https://coeus-system-inc.herokuapp.com/inventory"
-  //NODE_ENV: process.env.NODE_ENV || "development"
+  NODE_ENV: process.env.NODE_ENV || "development",
+  DATABASE_URL:
+    process.env.DATABASE_URL || "postgresql://tchang@localhost/coeus_system"
 };
+
+// "https://coeus-system-inc.herokuapp.com/inventory"
