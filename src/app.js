@@ -12,6 +12,10 @@ const app = express();
 const bodyParser = require("body-parser");
 const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 
+var corsOptions = {
+  origin: "http://localhost:3000"
+};
+app.use(cors(corsOptions));
 app.use(morgan(morganOption));
 app.use(express.json());
 app.use(helmet());
@@ -24,6 +28,7 @@ app.use(
 // const consumerData = require("../inventory-data.js");
 const db = require("../database/databaseindex");
 // get the search query
+
 app.get("/inventory", (req, res) => {
   db.select()
     .from("newvendor")
@@ -31,20 +36,6 @@ app.get("/inventory", (req, res) => {
     .then(data => {
       res.send(data);
     });
-  // const { search = "" } = req.query;
-  // // filter the results by the search query
-
-  // const results = consumerData.filter(consumer =>
-  //   consumer.Vendor.toLowerCase().includes(search.toLowerCase())
-  // );
-
-  // if (results === []) {
-  //   res
-  //     .status(404)
-  //     .json({ error: "Vendor Invalid, please enter a valid vendor" });
-  // }
-
-  // res.json(results);
 });
 
 ////////////////////////////////////////
