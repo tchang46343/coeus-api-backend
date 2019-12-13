@@ -34,7 +34,10 @@ app.get("/inventory", (req, res) => {
     .from("newvendor")
     .orderBy("id")
     .then(data => {
-      res.send(data);
+      res.json(data);
+    })
+    .catch(error => {
+      res.json(error);
     });
 });
 
