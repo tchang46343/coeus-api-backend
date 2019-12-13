@@ -1,4 +1,4 @@
-const { PORT, DATABASE_URL } = require("./config");
+const { DATABASE_URL } = require("../src/config");
 
 const knex = require("knex")({
   client: "pg",
