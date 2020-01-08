@@ -3,7 +3,7 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const uuid = require("uuid/v4");
-const { CLIENT_ORIGIN } = require("./config");
+const { CLIENT_ORIGIN, REACT_APP_BASE_URL } = require("./config");
 
 const helmet = require("helmet");
 const { NODE_ENV } = require("./config");
@@ -13,7 +13,7 @@ const bodyParser = require("body-parser");
 const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 
 var corsOptions = {
-  origin: "http://localhost:3000"
+  origin: REACT_APP_BASE_URL
 };
 app.use(cors(corsOptions));
 app.use(morgan(morganOption));
