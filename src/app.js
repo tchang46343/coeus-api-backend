@@ -25,9 +25,8 @@ app.use(
     extended: true
   })
 );
-// const consumerData = require("../inventory-data.js");
+
 const db = require("../database/databaseindex");
-// get the search query
 
 app.get("/inventory", (req, res) => {
   db.select()
@@ -40,11 +39,6 @@ app.get("/inventory", (req, res) => {
       res.json(error);
     });
 });
-
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
 
 app.post("/inventory", (req, res) => {
   const { vendor, item_name, description, price, availbility } = req.body;
@@ -67,11 +61,6 @@ app.post("/inventory", (req, res) => {
     });
 });
 
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-////////////////////////////////////////
-
 app.delete("/inventory/:id", (req, res) => {
   db("newvendor")
     .where({ id: req.params.id })
@@ -89,15 +78,5 @@ app.get("/inventory/:id", (req, res) => {
       res.send(data);
     });
 });
-
-//   const { inventoryId } = req.params;
-
-//   const index = inventory.findIndex(invent => invent.id === inventoryId);
-//   if (index === -1) {
-//     return res.status(404).send("User not found");
-//   }
-//   inventory.splice(index, 1);
-//   res.status(204).end();
-// });
 
 module.exports = app;
