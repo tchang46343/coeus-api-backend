@@ -15,7 +15,7 @@ As a result, the benefit of using Coeus System Inc is to provide a single point 
 
 `/inventory/:id`
 
-- **Method:**
+- **Methods:**
 
 `GET`
 
