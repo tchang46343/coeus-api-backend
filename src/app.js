@@ -13,7 +13,7 @@ const bodyParser = require("body-parser");
 const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 
 var corsOptions = {
-  origin: REACT_APP_BASE_URL
+  origin: "*"
 };
 app.use(cors(corsOptions));
 app.use(morgan(morganOption));
